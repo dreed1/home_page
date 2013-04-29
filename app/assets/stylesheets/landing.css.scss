@@ -1,0 +1,50 @@
+// Place all the styles related to the landing controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.landing-container {
+  width: 100%;
+  text-align: center;
+
+  .picture-cluster {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+
+    .cluster-image {
+      cursor: hand;
+      margin: 2px;
+      width: 110px;
+      height: 110px;
+      border: 1px solid black;
+      border-radius: 10px/ 6px;
+      transition: all 0.1s ease-out;
+    }
+    .cluster-image:hover {
+      box-shadow: 0px 0px 7px 3px rgba(42,42,42,0.8);
+    }
+  }
+  .greetings {
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+.black-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+#cboxContent {
+  border: 2px solid white;
+  box-shadow: 0px 0px 7px 3px rgba(242,242,242,0.8);
+}
+
+:focus {
+    outline: none;
+}

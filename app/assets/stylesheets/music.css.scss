@@ -1,0 +1,39 @@
+.music-container {
+  width: 100%;
+}
+
+.music-song-list {
+  width: 600px;
+  list-style-type:none;
+  margin: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.music-song-item {
+  background-color: #ccc;
+  width: inherit;
+  padding: 2px;
+  margin: 4px;
+  border: 0px solid black;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.audio-player {
+  float: left;
+}
+
+.audio-song-title {
+  float: left;
+  margin-left: 17px;
+  line-height: 30px;
+  font-size: 24px;
+}
+
+#admonishment {
+  margin-top: 30px;
+  margin-left: 150px;
+  margin-right: 150px;
+  text-align: center;
+}
