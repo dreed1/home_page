@@ -60,4 +60,5 @@ HomePage::Application.routes.draw do
   match 'code' => 'code#index'
   match 'music' => 'music#index'
   match 'photos' => 'photos#index'
+  match "*a" => "application#render_404"
 end
