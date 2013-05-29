@@ -4,36 +4,53 @@ gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'pg'
-
 gem 'json'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+gem  'rspec'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
+# Extention libraries
+gem 'thin', '~> 1'
+
+# Rendering engines and vendor libraries
+gem 'jquery-rails', '~> 2'
+gem 'redcarpet'
+
+# Misc libraries
+# gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
+gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
+gem 'kaminari', '~> 0.13'
+
+group :production do
+  # gem 'newrelic_rpm', '~> 3'
+  # gem 'dalli', '~> 1'
+  gem 'pg', '~> 0.13'
 end
 
-gem 'jquery-rails'
-gem  'rspec'
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+group :development do
+  # gem 'heroku', '~> 2'
+  # gem 'capistrano', '~> 2.9'
+  # gem 'guard', '~> 1'
+  # gem 'guard-rspec', '~> 0.6'
+  # gem 'guard-spork', '~> 0.5'
+  gem 'rails_best_practices', '~> 1'
+end
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+group :test do
+  gem 'capybara', '~> 1'
+  gem 'spork', '~> 0.9'
+  gem 'database_cleaner', '~> 0.7'
+end
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :development, :test do
+  gem 'foreman', '~> 0.40'
+  gem 'pg', '~> 0.13'
+  gem 'faker', '~> 1'
+  gem 'factory_girl_rails', '~> 1'
+end
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug'
+group :assets do
+  gem 'sass-rails', '~> 3'
+  gem 'coffee-rails', '~> 3'
+  gem 'uglifier', '~> 1'
+end

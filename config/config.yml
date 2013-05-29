@@ -1,0 +1,10 @@
+---
+title:               Dan Reed
+tagline:             I *am* a bad enough dude to rescue the president.
+login:               <%= ENV["obtvse_login"] ? ENV["obtvse_login"] : "username" %>
+password:            <%= ENV["obtvse_password"] ? ENV["obtvse_password"] : "password" %>
+name:                Dan Reed
+twitter:             danreedx86
+github:              dreed1
+email:               danreedx86@gmail.com
+google_analytics_id: YOUR_GA_ID

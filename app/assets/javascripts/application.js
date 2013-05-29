@@ -15,3 +15,7 @@
 //= require_tree .
 //= require vendor/jquery.colorbox-min.js
 //= require space-cats.js
+//= require fitvids.js
+//= require posts.js
+//= require showdown.js
+//= require_tree ./admin
