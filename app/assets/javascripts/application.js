@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
-//= require vendor/jquery.colorbox-min.js
-//= require space-cats.js
-//= require fitvids.js
+//= require landing.js
+//= require main_layout.js
+//= require music.js
+//= require photos.js
 //= require posts.js
-//= require showdown.js
+//= require_tree ./vendor
 //= require_tree ./admin
