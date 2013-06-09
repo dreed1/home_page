@@ -91,6 +91,7 @@ header {
 }
 
 #container {
+  height: 100%;
   margin-left: 243px;
   position: relative;
 
@@ -105,6 +106,9 @@ header {
 }
 
 #content {
+  overflow-y: scroll;
+  height: 100%;
+
   section {
     padding: 26px 0 40px 50px;
     border-bottom: 1px solid #ddd;

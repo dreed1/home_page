@@ -31,7 +31,7 @@ $(function() {
         original_action = $form.attr('action');
     $('#preview-button').click(function(e) {
       if (validateTitle()) {
-        $form.attr('action', '/preview');
+        $form.attr('action', '/blog/preview');
         $form.attr('target', '_blank');
         $form.submit();
       } else {

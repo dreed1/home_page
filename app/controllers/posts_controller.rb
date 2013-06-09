@@ -66,7 +66,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to "blog/edit/#{@post.id}", :notice => "Post created successfully" }
+        format.html { redirect_to "/blog/edit/#{@post.id}", :notice => "Post created successfully" }
         format.xml { render :xml => @post, :status => :created, location: @post }
       else
         format.html { render :action => 'new' }
