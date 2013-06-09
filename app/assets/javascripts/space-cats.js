@@ -9,9 +9,9 @@
   this.lives = 3;
 
   this.pizzas = [];
-  this.pizzaCount = 10;
-  this.pizzaDefaultSpeed = 8;
-  this.pizzaSliceDefaultSpeed = 12;
+  this.pizzaCount = 8;
+  this.pizzaDefaultSpeed = 7;
+  this.pizzaSliceDefaultSpeed = 13;
 
   this.leftPressed = false;
   this.rightPressed = false;
@@ -19,8 +19,11 @@
   this.downPressed = false;
   this.firingLazors = false;
 
-  this.gameWidth = document.body.clientWidth;
-  this.gameHeight = document.body.clientHeight;
+  this.touchX = 0;
+  this.touchY = 0;
+
+  this.gameWidth = 0;
+  this.gameHeight = 0;
 
   var pizzaReady = false;
   var pizzaImage = new Image();
@@ -57,10 +60,6 @@
   };
   backgroundImage.src = "images/space_cats/bkgd-bluehorsehead_rosen_2048.jpg";
 
-  this.allImagesReady = function() {
-    return pizzaReady && sliceReady && explosionReady && userReady && backgroundReady;
-  }
-
   /*********************************************************************************/
   /*********************************USER MODEL**************************************/
   /*********************************************************************************/
@@ -70,11 +69,11 @@
 
     $.extend(this, {
       velocity: 0,
-      maximumVelocity: 30,
-      acceleration: 0.7,
-      brakeCoefficient: 0.95,
+      maximumVelocity: 38,
+      acceleration: 0.94,
+      brakeCoefficient: 0.98,
       turnSpeed: 9,
-      angle: 270,
+      angle: 0,
       speedX: 0,
       speedY: 0,
       positionX: _this.gameWidth/2,
@@ -91,11 +90,44 @@
     },opts);
 
     this.move = function() {
+      handleTouch();
       handleTurning();
       handleVelocity();
       moveCat();
       wrapScreen();
       fireLazors();
+
+      function handleTouch() {
+        if(_this.touchX != 0 && _this.touchY != 0) {
+          var playerCenter = _this.findCenterOfRotatedRect(_this.userCat.positionX, _this.userCat.positionY, _this.userCat.width, _this.userCat.height, _this.userCat.angle);
+          var dy = _this.touchY - playerCenter.y;
+          var dx = _this.touchX - playerCenter.x;
+          var minimumTurnThreshold = 5;
+          var rads = Math.atan2(dy, dx);
+          var touchAngle = ((rads * 180/Math.PI) + 360) % 360// rads to degs
+          var lineDistance = _this.distanceBetweenTwoPoints(_this.touchX, _this.touchY, playerCenter.x, playerCenter.y);
+          self.velocity += self.acceleration * (2*(lineDistance / Math.min(_this.gameWidth, _this.gameHeight)));
+
+          if(Math.abs(self.angle - touchAngle) > minimumTurnThreshold ) {
+            if(shouldTurnLeft(self.angle, touchAngle)) {
+              self.angle -= self.turnSpeed;
+            }
+            else {
+              self.angle += self.turnSpeed;
+            }
+          }
+        }
+        function shouldTurnLeft(playerAngle, touchAngle) {
+          var result = false;
+          if(playerAngle >=0 && playerAngle < 180) {
+            result = !(playerAngle < touchAngle && (playerAngle + 180) % 360 > touchAngle);
+          }
+          else {
+            result = (playerAngle > touchAngle && (playerAngle + 180) % 360 < touchAngle);
+          }
+          return result;//touchAngle >= playerAngle && touchAngle < (playerAngle + 180) % 360
+        }
+      }
 
       function handleTurning() {
         if(_this.leftPressed) {
@@ -113,7 +145,7 @@
         }
         if(_this.downPressed) {
           self.velocity -= self.acceleration;
-          if(self.velocity > self.maximumVelocity) self.velocity = self.maximumVelocity;
+          if(self.velocity < -self.maximumVelocity) self.velocity = -self.maximumVelocity;
         }
       }
 
@@ -387,81 +419,107 @@
   /*********************************************************************************/
 
   this.initializeSpaceCats = function() {
-    _this.userCat = new User();
     _this.applyBindings();
     $(document).ready(function() {
+      _this.gameWidth = document.body.clientWidth;
+      _this.gameHeight = document.body.clientHeight;
       _this.canvas = document.getElementById('space-canvas');
-      _this.canvas.height = document.body.clientHeight;
-      _this.canvas.width = document.body.clientWidth;
+      _this.canvas.height = _this.gameHeight;
+      _this.canvas.width = _this.gameWidth;
       _this.context = canvas.getContext('2d');
-      console.log(_this.canvas)
-      console.log(_this.context)
-      _this.createPizzas(function() {
-        setInterval(function() {
-          if(_this.gameInPlay && _this.allImagesReady()){
-            _this.loop();
-          }
-        },33);//30 times a second
-      });
+      _this.userCat = new User();
+      _this.createPizzas();
     });
   }
 
-  this.createPizzas = function(callback) {
+  this.createPizzas = function() {
     _this.creatingPizzas = true;
     for(var i=0; i< _this.pizzaCount ; i++) {
       _this.pizzas.push(new Pizza({}));
     }
     _this.creatingPizzas = false;
-    if(callback) callback();
   }
 
   this.applyBindings = function() {
-      $(document).keydown(function (e) {
-        var keyCode = e.keyCode || e.which,
-          arrow = {left: 37, up: 38, right: 39, down: 40 };
-        switch (keyCode) {
-          case arrow.left:
-            _this.leftPressed = true;
-          break;
-          case arrow.up:
-            _this.upPressed = true;
-          break;
-          case arrow.right:
-            _this.rightPressed = true;
-          break;
-          case arrow.down:
-            _this.downPressed = true;
-          break;
-        }
-        if(e.keyCode == 32) {
-          _this.firingLazors = true;
-        }
-      });
-      $(document).keyup(function (e) {
-        var keyCode = e.keyCode || e.which,
-          arrow = {left: 37, up: 38, right: 39, down: 40 };
-        switch (keyCode) {
-          case arrow.left:
-            _this.leftPressed = false;
-          break;
-          case arrow.up:
-            _this.upPressed = false;
-          break;
-          case arrow.right:
-            _this.rightPressed = false;
-          break;
-          case arrow.down:
-            _this.downPressed = false;
-          break;
-        }
-        if(e.keyCode == 32) {
-          _this.firingLazors = false;
-        }
-        if(e.keyCode == 188) {
-          _this.toggleDebug();
-        }
-      });
-    }
+    $(document).bind('touchstart', function(event){
+      _this.handleTouchStart(event);
+    });
+    $(document).bind('touchmove', function(event){
+      _this.handleTouchMove(event);
+    });
+    $(document).bind('touchend', function(event){
+      _this.handleTouchEnd(event);
+    });
+
+    $(document).keydown(function (e) {
+      var keyCode = e.keyCode || e.which,
+        arrow = {left: 37, up: 38, right: 39, down: 40 };
+      switch (keyCode) {
+        case arrow.left:
+          _this.leftPressed = true;
+        break;
+        case arrow.up:
+          _this.upPressed = true;
+        break;
+        case arrow.right:
+          _this.rightPressed = true;
+        break;
+        case arrow.down:
+          _this.downPressed = true;
+        break;
+      }
+      if(e.keyCode == 32) {
+        _this.firingLazors = true;
+      }
+    });
+    $(document).keyup(function (e) {
+      var keyCode = e.keyCode || e.which,
+        arrow = {left: 37, up: 38, right: 39, down: 40 };
+      switch (keyCode) {
+        case arrow.left:
+          _this.leftPressed = false;
+        break;
+        case arrow.up:
+          _this.upPressed = false;
+        break;
+        case arrow.right:
+          _this.rightPressed = false;
+        break;
+        case arrow.down:
+          _this.downPressed = false;
+        break;
+      }
+      if(e.keyCode == 32) {
+        _this.firingLazors = false;
+      }
+      //the comma key
+      if(e.keyCode == 188) {
+        _this.toggleDebug();
+      }
+    });
+  }
+
+  this.handleTouchStart = function(event) {
+    _this.handleTouchEvent(event);
+  }
+
+  this.handleTouchMove = function(event) {
+    _this.handleTouchEvent(event);
+  }
+
+  this.handleTouchEnd = function(event) {
+    _this.touchX = 0;
+    _this.touchY = 0;
+    //_this.handleTouchEvent(event);
+  }
+
+  this.handleTouchEvent = function(event) {
+    var xPos = event.originalEvent.touches[0].pageX;
+    var yPos = event.originalEvent.touches[0].pageY;
+
+    _this.touchX = xPos;
+    _this.touchY = yPos;
+  }
 
   this.toggleDebug = function() {
     if(_this.debug){
@@ -609,6 +667,30 @@
     _this.drawLazors();
     _this.drawCats();
     _this.drawHud();
+    _this.drawDebug();
+  }
+
+  this.drawBackground = function() {
+    _this.context.fillStyle = "rgb(250, 250, 250)";
+    _this.context.drawImage(backgroundImage, 0, 0, _this.gameWidth, _this.gameHeight);
+    _this.context.fonts = "5px helvetica";
+    _this.context.fillText("404 - page not found, sucka",361,200);
+  }
+
+  this.drawCats = function() {
+    _this.userCat.draw();
+  }
+
+  this.drawPizzas = function() {
+    for(var i=0; i< _this.pizzas.length; i++){
+      _this.pizzas[i].draw();
+    }
+  }
+
+  this.drawLazors = function() {
+    for(var i=0; i< _this.userCat.lazors.length; i++){
+      _this.userCat.lazors[i].draw();
+    }
   }
 
   this.drawHud = function() {
@@ -634,9 +716,6 @@
     _this.context.fonts = "10pt helvetica";
     _this.context.fillText("HP",healthBarPositionX+3, healthBarPositionY+(healthBarHeight/2));
     _this.context.fillText("SCORE:" + _this.userScore, scorePositionX, scorePositionY);
-    _this.context.fillText("Arrow keys to move.", _this.gameWidth - 115, _this.gameHeight - 50);
-    _this.context.fillText("Space to shoot lazers.", _this.gameWidth - 122, _this.gameHeight - 32);
-    _this.context.fillText("Save the world from space pizzas as my cat.", _this.gameWidth - 220, _this.gameHeight - 14);
 
     for( var i=0; i< _this.lives; i++) {
       _this.drawRotatedImage(userImage,livesOriginX+livesOffsetX, livesOriginY+livesOffsetY,lifeWidth, lifeHeight, 270);
@@ -644,31 +723,29 @@
     }
   }
 
+  this.drawDebug = function() {
+    if(_this.debug) {
+      if(_this.touchX > 0 && _this.touchY > 0) {
+        var playerCenter = _this.findCenterOfRotatedRect(_this.userCat.positionX, _this.userCat.positionY, _this.userCat.width, _this.userCat.height, _this.userCat.angle);
+        _this.context.fillStyle = "rgb(250, 0, 0)";
+        _this.context.beginPath();
+        _this.context.arc(_this.touchX, _this.touchY, 10, 0, Math.PI*2); 
+        _this.context.closePath();
+        _this.context.fill();
 
-  this.drawBackground = function() {
-    _this.context.fillStyle = "rgb(250, 250, 250)";
-    _this.context.drawImage(backgroundImage, 0, 0, _this.gameWidth, _this.gameHeight);
-    _this.context.fonts = "5px helvetica";
-    _this.context.fillText("404 - page not found, sucka",361,200);
-  }
-
-  this.drawCats = function() {
-    _this.userCat.draw();
-  }
-
-  this.drawPizzas = function() {
-    for(var i=0; i< _this.pizzas.length; i++){
-      _this.pizzas[i].draw();
-    }
-  }
-
-  this.drawLazors = function() {
-    for(var i=0; i< _this.userCat.lazors.length; i++){
-      _this.userCat.lazors[i].draw();
+        _this.context.strokeStyle = "rgb(145,145,0)";
+        _this.context.lineWidth = 5;
+        _this.context.beginPath();
+        _this.context.moveTo(_this.touchX, _this.touchY);
+        _this.context.lineTo(playerCenter.x, playerCenter.y);
+        _this.context.stroke();
+      }
     }
   }
 
   this.maintainUser = function() {
+    if(_this.userCat.angle < 0) _this.userCat.angle += 360;
+    if(_this.userCat.angle >= 360) _this.userCat.angle = _this.userCat.angle % 360 ;
     if(_this.userCat.hitPoints < 0){
       _this.lives -= 1;
       if(_this.lives > 0){
@@ -689,4 +766,9 @@
   }
 
   _this.initializeSpaceCats();
+
+  setInterval(function() {
+    if(_this.gameInPlay){}
+    _this.loop();
+  },33);//30 times a second
 })();
