@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_filter :authenticate, :except => [:index, :show]
+  before_filter :create_stupid_headers
   layout :choose_layout
 
   def index
@@ -32,6 +33,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    session[:text] = 'banana'
     @single_post = true
     @post = admin? ? Post.find_by_slug(params[:slug]) : Post.find_by_slug_and_draft(params[:slug],false)
 
@@ -111,5 +113,18 @@ class PostsController < ApplicationController
     else
       'blog'
     end
+  end
+
+  def create_stupid_headers
+    @possible_marquees = [
+      'Rad naner lives again!', 
+      'When was the last time you saw a marquee element?',
+      'Life should have more burritos.',
+      'Are you sure you want to delete System32?',
+      'More cat love than your local librarian.',
+      'Not with that finger!',
+      'Can I go outside yet?',
+      'Now accepting applications for tattoo artists.'
+    ]
   end
 end
