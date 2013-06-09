@@ -133,7 +133,9 @@ class PostsController < ApplicationController
       'Best video game ever? Diablo II, or get out of my house.',
       'FALCON PUNCH!',
       'Mo money, mo discreet electronics projects.',
-      "What does the phrase 'the DH is BS' mean to you? I saw on a sticker once."
+      "What does the phrase 'the DH is BS' mean to you? I saw on a sticker once.",
+      'Tropical island adventure!',
+      'Whiskey: not a vegetable.'
     ]
   end
 end

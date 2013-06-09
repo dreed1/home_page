@@ -81,7 +81,7 @@
       width: 130,
       height: 70,
       lazorRechargeTime: 100, //milliseconds
-      lazorDefaultVelocity: 10,
+      lazorDefaultVelocity: 30,
       lazorsReady: true,
       lazors: [],
       hitPoints: 100,
@@ -593,10 +593,12 @@
   }
 
   this.loop = function() {
-    _this.moveObjects();
-    _this.drawObjects();
-    _this.checkCollisions();
-    _this.gameInPlay = _this.maintainUser();
+    if (pizzaReady && sliceReady && explosionReady && backgroundReady && userReady) {
+      _this.moveObjects();
+      _this.drawObjects();
+      _this.checkCollisions();
+      _this.gameInPlay = _this.maintainUser();
+    }
   }
 
   this.moveObjects = function() {
