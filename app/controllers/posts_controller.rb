@@ -124,7 +124,16 @@ class PostsController < ApplicationController
       'More cat love than your local librarian.',
       'Not with that finger!',
       'Can I go outside yet?',
-      'Now accepting applications for tattoo artists.'
+      'Now accepting applications for tattoo artists.',
+      'Remember when it used to whip the llamas ass? What happened?',
+      'For some reason I just cant seem to enjoy techno music for more than 20 minutes.',
+      'I want to ride bikes till my legs fall off.',
+      'Turtle Power!',
+      'Je suis le egg man.',
+      'Best video game ever? Diablo II, or get out of my house.',
+      'FALCON PUNCH!',
+      'Mo money, mo discreet electronics projects.',
+      "What does the phrase 'the DH is BS' mean to you? I saw on a sticker once."
     ]
   end
 end
