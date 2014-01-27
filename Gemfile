@@ -7,7 +7,6 @@ gem 'thin', '~> 1'
 gem 'jquery-rails', '~> 2'
 gem 'redcarpet'
 gem 'pg', '~> 0.13'
-gem 'asset_sync'
 gem 'flickraw'
 
 # Misc libraries
