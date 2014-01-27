@@ -1,3 +1,7 @@
-</br>
-</br>
-<div class="center">I got nothing for ya here, still workin on it! Until then, please enjoy the photos I've left on my homepage.</div>
+<div class="photos-container">
+  <div class="picture-cluster center">
+    <% @list.each do |i| %>
+      <%= image_tag("http://farm#{i.farm}.staticflickr.com/#{i.server}/#{i.id}_#{i.secret}.jpg", :class =>"cluster-image") %>
+    <% end %>
+  </div>
+</div>

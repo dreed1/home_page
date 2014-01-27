@@ -1,20 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'json'
-
-gem  'rspec'
-
-
-# Extention libraries
+gem 'rspec'
 gem 'thin', '~> 1'
-
-# Rendering engines and vendor libraries
 gem 'jquery-rails', '~> 2'
 gem 'redcarpet'
+gem 'pg', '~> 0.13'
+gem 'asset_sync'
+gem 'flickraw'
 
 # Misc libraries
 # gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
@@ -22,17 +16,9 @@ gem 'stringex', '~> 1', git: 'git://github.com/rsl/stringex.git'
 gem 'kaminari', '~> 0.13'
 
 group :production do
-  # gem 'newrelic_rpm', '~> 3'
-  # gem 'dalli', '~> 1'
-  gem 'pg', '~> 0.13'
 end
 
 group :development do
-  # gem 'heroku', '~> 2'
-  # gem 'capistrano', '~> 2.9'
-  # gem 'guard', '~> 1'
-  # gem 'guard-rspec', '~> 0.6'
-  # gem 'guard-spork', '~> 0.5'
   gem 'rails_best_practices', '~> 1'
 end
 
@@ -44,7 +30,6 @@ end
 
 group :development, :test do
   gem 'foreman', '~> 0.40'
-  gem 'pg', '~> 0.13'
   gem 'faker', '~> 1'
   gem 'factory_girl_rails', '~> 1'
 end
