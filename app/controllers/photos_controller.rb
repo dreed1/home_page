@@ -7,8 +7,10 @@ class PhotosController < ApplicationController
 
     @user_id = '115503225@N04'
 
-    @list  = flickr.photos.getContactsPublicPhotos(:user_id => @user_id, :include_self => '1', :extras => 'extras', :count => '50')
+    @list  = flickr.photos.search(:user_id => @user_id)
     
+    puts @list.count
+
     render :layout => 'main_layout'
   end
 end
