@@ -1,7 +1,5 @@
-
-<div class="landing-container">
-  <div class="bkgd-cover-image"></div>
-  <div class="greetings">
-    Hi! I'm Dan Reed, a software engineer in San Francisco, working mostly with ruby/rails, iOS, and javascript. <br/>In my spare time I also ride my bike, play guitar, and share two cats with my girlfriend. 日本語とも話せます。<br/>I'm currently employed at <a class="text-link" href="https://yesware.com"> Yesware </a>.
-  </div>
-</div>
+<div id="bkgd-cover-image"></div>
+<%= render :partial => '/landing/base' %>
+<%= render :partial => '/landing/code' %>
+<%= render :partial => '/landing/music' %>
+<%= render :partial => '/landing/photos' %>

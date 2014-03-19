@@ -1,39 +1,9 @@
 <%= stylesheet_link_tag 'application' %>
 
-<div class="main-header-container">
-  <a href="<%= root_path %>"><img class="main-header-profile-pic" src="http://www.gravatar.com/avatar/fd8b39735d9a7d3de65011d671ee2c17.png" alt="This dude is me."/></a>
-  <a class="main-header-title" href="<%= root_path %>">Dan Reed</a>
-  <ul class="main-header-list">
-    <li id="main-header-blog">
-      <a href="<%= blog_path %>">Blog</a>
-    </li>
-    <li id="main-header-music">
-      <a href="<%= music_path %>">Music</a>
-    </li>
-    <li id="main-header-pics">
-      <a href="<%= photos_path %>">Photos</a>
-    </li>
-    <li id="main-header-code">
-      <a href="<%= code_path %>">Code</a>
-    </li>
-  </ul>
-</div>
-
-<div class="spacer-top"></div>
+<%= render :partial => '/layouts/header' %>
 
 <%= yield %>
 
-<div class="spacer-100"></div>
-
-<div class="main-footer-container">
-  <div class="main-footer-links-container">
-    <a href="https://github.com/dreed1">GITHUB</a>
-    <a href="https://www.facebook.com/danreedx86">FACEBOOK</a>
-    <a href="https://twitter.com/DanReedx86">TWITTER</a>
-    <a href="www.linkedin.com/pub/dan-reed/35/45a/249/">LINKEDIN</a>
-    <a href="http://www.flickr.com/photos/115503225@N04/">FLICKR</a>
-  </div>
-  <div>Copyright <a id='mail-to-me' href="mailto:danreedx86@gmail.com?Subject=Hey%20dude">Dan Reed</a> 2013</div>
-</div>
+<%= render :partial => '/layouts/footer' %>
 
 <%= javascript_include_tag 'application' %>
