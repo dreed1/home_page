@@ -1,0 +1,9 @@
+<div class="page-container" id="photos" style="display:none;">
+  <div class="subheader">Photos</div>
+  <div class="details">I like to take pictures and I also like photoshop.</div>
+  <div class="photo-container">
+    <% @list.each do |i| %>
+      <%= image_tag("http://farm#{i.farm}.staticflickr.com/#{i.server}/#{i.id}_#{i.secret}.jpg", :class =>"cluster-image") %>
+    <% end %>
+  </div>
+</div>
