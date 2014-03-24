@@ -9,6 +9,7 @@ gem 'jquery-ui-rails'
 gem 'redcarpet'
 gem 'pg', '~> 0.13'
 gem 'flickraw'
+gem 'newrelic_rpm'
 
 # Misc libraries
 # gem 'bcrypt-ruby', '~> 3', require: 'bcrypt'
