@@ -16,7 +16,6 @@
 //= require main_layout.js
 //= require music.js
 //= require photos.js
-//= require posts.js
 //= require jquery.ui.effect-slide
 //= require_tree ./vendor
 //= require_tree ./admin
