@@ -2,12 +2,12 @@ require 'flickraw'
 
 class PhotosController < ApplicationController
   def index
-    FlickRaw.api_key = ENV['FLICKR_API_KEY']
-    FlickRaw.shared_secret = ENV['FLICKR_API_SECRET']
+    # FlickRaw.api_key = ENV['FLICKR_API_KEY']
+    # FlickRaw.shared_secret = ENV['FLICKR_API_SECRET']
 
-    @user_id = '115503225@N04'
+    # @user_id = '115503225@N04'
 
-    @list  = flickr.photos.search(:user_id => @user_id)
+    @list  = []#flickr.photos.search(:user_id => @user_id)
     
     puts @list.count
 

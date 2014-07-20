@@ -7,7 +7,6 @@ gem 'thin', '~> 1'
 gem 'jquery-rails', '~> 2'
 gem 'jquery-ui-rails'
 gem 'redcarpet'
-gem 'pg', '~> 0.13'
 gem 'flickraw'
 gem 'newrelic_rpm'
 

@@ -96,7 +96,6 @@ GEM
     multi_json (1.7.2)
     newrelic_rpm (3.6.8.168)
     nokogiri (1.5.9)
-    pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -192,7 +191,6 @@ DEPENDENCIES
   json
   kaminari (~> 0.13)
   newrelic_rpm
-  pg (~> 0.13)
   rails (= 3.2.13)
   rails_best_practices (~> 1)
   redcarpet
