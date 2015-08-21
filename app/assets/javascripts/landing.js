@@ -5,7 +5,7 @@
       activeViewIndex = 0;
 
   $(document).ready(function(){
-    views = [$('#base'), $('#code'), $('#photos'), $('#music')];
+    views = [$('#base'), $('#code'), $('#photos'), $('#music'), $('#about'),];
     bindEvents();
   })
 
@@ -18,6 +18,9 @@
     });
     $('#main-header-photos').click(function() {
       showPhotos();
+    });
+    $('#main-header-about').click(function() {
+      showAboutMe();
     });
     $('#main-header-code').click(function() {
       showCode();
@@ -32,7 +35,7 @@
       $activeView.hide(
         "slide", 
         { direction: "right" }, 
-        400, 
+        300, 
         function() {
           $('#base').show("slide", { direction: "left" });
         }
@@ -48,7 +51,7 @@
       $activeView.hide(
         "slide", 
         { direction: "left" }, 
-        400, 
+        300, 
         function() {
           $('#code').show("slide", { direction: "right" });
         }
@@ -64,9 +67,25 @@
       $activeView.hide(
         "slide", 
         { direction: "left" }, 
-        400, 
+        300, 
         function() {
           $('#photos').show("slide", { direction: "right" });
+        }
+      );
+    }
+  }
+
+  var showAboutMe = function() {
+    if(activeViewIndex != 4) {
+      var $activeView = views[activeViewIndex];
+      activeViewIndex = 4;
+      
+      $activeView.hide(
+        "slide", 
+        { direction: "left" }, 
+        300, 
+        function() {
+          $('#about').show("slide", { direction: "right" });
         }
       );
     }
@@ -80,7 +99,7 @@
       $activeView.hide(
         "slide", 
         { direction: "left" }, 
-        400, 
+        300, 
         function() {
           $('#music').show("slide", { direction: "right" });
         }

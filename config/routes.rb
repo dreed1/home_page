@@ -16,5 +16,5 @@ HomePage::Application.routes.draw do
   # delete 'blog/:slug', :to => 'posts#destroy', :as  => 'post'
   # put 'blog/:slug', :to => 'posts#update', :as  => 'post'
 
-  match "*a" => "application#render_404"
+  get "*any", via: :all, to: "error#cats_404"
 end
