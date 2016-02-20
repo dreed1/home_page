@@ -25,6 +25,9 @@
     $('#main-header-code').click(function() {
       showCode();
     });
+    $('#main-header-blog').click(function() {
+      showBlog();
+    });
   }
 
   var showBase = function() {
@@ -41,6 +44,10 @@
         }
       );
     }
+  }
+
+  var showBlog = function() {
+    window.location = 'http://blog.danreed.codes'
   }
 
   var showCode = function() {

@@ -205,6 +205,20 @@ body {
     background-color: rgba(0,0,0,0.0); 
     color: $sunset-dark;
   }
+  #main-header-blog {
+    background-image:url('blog-icon-normal.png');
+    background-size: 22px 30px;
+    background-repeat:no-repeat;
+    background-position: 4px 4px;
+    padding-left: 36px;
+  }
+  #main-header-blog:hover {
+    background-image:url('blog-icon-hover.png');
+    background-size: 22px 30px;
+    background-repeat:no-repeat;
+    background-position: 4px 4px;
+    padding-left: 36px;
+  }
   #main-header-music {
     background-image:url('music-icon-normal.png');
     background-size: 22px 30px;
